@@ -1,0 +1,10 @@
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:F97CFFDE-412F-4421-BB37-93D042691AA0, OS:18.6, name:iPhone 16 Plus }
+{ platform:iOS Simulator, arch:x86_64, id:F97CFFDE-412F-4421-BB37-93D042691AA0, OS:18.6, name:iPhone 16 Plus }
+** BUILD FAILED **
+
+
+The following build commands failed:
+	CompileC /Users/abdullah/Library/Developer/Xcode/DerivedData/learningapp-gvjyowdyexfhiuffqqaweknjzjcd/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/React-RCTImage.build/Objects-normal/arm64/RCTBundleAssetImageLoader.o /Users/abdullah/Desktop/free/TestingApp/node_modules/react-native/Libraries/Image/RCTBundleAssetImageLoader.mm normal arm64 objective-c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'React-RCTImage' from project 'Pods')
+	Building workspace learningapp with scheme learningapp and configuration Debug
+(2 failures)

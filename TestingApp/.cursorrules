@@ -1,0 +1,186 @@
+# Cursor Rules for Learning App
+
+## Project Overview
+This is a React Native learning application built with Expo Router, TypeScript, and Redux Toolkit. The app supports multiple user roles (teacher, student, parent) and includes Arabic language support with RTL layout.
+
+## Tech Stack
+- **Framework**: React Native with Expo Router (file-based routing)
+- **Language**: TypeScript (strict mode enabled)
+- **State Management**: Redux Toolkit with RTK Query
+- **Navigation**: React Navigation / Expo Router
+- **Animations**: React Native Reanimated
+- **Icons**: @expo/vector-icons (MaterialIcons)
+- **Styling**: StyleSheet API
+
+## Code Style & Standards
+
+### TypeScript
+- Always use TypeScript with strict mode
+- Define interfaces/types for all API requests and responses
+- Use proper type annotations, avoid `any` unless absolutely necessary
+- Export types/interfaces from API slice for reuse
+- Use type inference where appropriate but be explicit for function parameters and return types
+
+### File Structure
+- Use path aliases (`@/*`) for all imports from project root
+- Components go in `/components` directory
+- Screens/routes go in `/app` directory (Expo Router structure)
+- API logic goes in `/store/api`
+- Constants go in `/constants`
+- Custom hooks go in `/hooks`
+- Use kebab-case for file names (e.g., `themed-text.tsx`, `apiSlice.ts`)
+
+### Component Patterns
+- Always use functional components with hooks
+- Use `ThemedText` and `ThemedView` components for theme-aware UI elements
+- Prefer `ThemedText` over native `Text` component
+- Use `ThemedView` for containers that need theme support
+- Export components as default when they're the main export
+- Use named exports for utility components or multiple exports
+
+### Styling
+- Use `StyleSheet.create()` for all styles
+- Define styles at the bottom of component files
+- Use theme colors from `@/constants/theme` via `useColorScheme()` and `Colors[colorScheme]`
+- Support both light and dark modes
+- Use consistent spacing (multiples of 4 or 8)
+- Use borderRadius values like 8, 12, 16 for consistency
+- Apply shadows/elevation for depth on buttons and cards
+
+### State Management
+- Use Redux Toolkit with RTK Query for all API calls
+- Define all API endpoints in `/store/api/apiSlice.ts`
+- Use proper TypeScript interfaces for request/response types
+- Follow the API response pattern: `{ success: boolean, data: T, message: string }`
+- Use RTK Query tags for cache invalidation (`providesTags`, `invalidatesTags`)
+- Export hooks from apiSlice (e.g., `useGetCountriesQuery`, `useLoginMutation`)
+- Use `useAppDispatch` and `useAppSelector` from `/store/hooks` if needed
+
+### API Patterns
+- All API endpoints should be defined in `apiSlice.ts`
+- Base URL is defined in `/constants/config.ts`
+- Use `fetchBaseQuery` with proper headers
+- Include `Content-Type: application/json` in headers
+- Define tag types for cache management
+- Use mutations for POST/PUT/DELETE, queries for GET
+- Handle loading, error, and success states properly
+
+### Forms & Validation
+- Use controlled components with `useState` for form data
+- Validate required fields before submission
+- Show validation errors using toast notifications
+- Use `ActivityIndicator` for loading states during form submission
+- Disable submit buttons during loading
+- Use proper input types (email, password, etc.)
+
+### Navigation
+- Use Expo Router's `useRouter()` hook for navigation
+- Use `router.push()` for navigation, `router.replace()` for replacing current route
+- Use `router.back()` for going back
+- Define routes in `app/_layout.tsx` with proper options
+- Hide headers when needed: `options={{ headerShown: false }}`
+
+### Animations
+- Use `react-native-reanimated` for animations
+- Use `useSharedValue` and `useAnimatedStyle` for animated values
+- Prefer `withSpring` or `withTiming` for animations
+- Initialize animations in `useEffect` hooks
+- Keep animations smooth and performant
+
+### Error Handling
+- Use toast notifications for user-facing errors (`@/hooks/use-toast`)
+- Extract error messages from API responses: `'data' in error ? (error.data as any)?.message : 'Default message'`
+- Show success messages for important actions
+- Handle loading states properly
+- Display user-friendly Arabic error messages
+
+### Internationalization
+- Support Arabic text (RTL layout)
+- Use Arabic labels and messages in UI
+- Ensure proper text alignment for Arabic content
+- Use appropriate fonts that support Arabic characters
+
+### Icons
+- Use `@expo/vector-icons` with `MaterialIcons` component
+- Use semantic icon names (e.g., `email`, `lock`, `person`, `arrow-back`)
+- Set appropriate icon sizes (typically 20-24 for inputs, 32+ for headers)
+- Use theme colors for icon colors
+
+### Performance
+- Use `React.memo` for expensive components when appropriate
+- Avoid unnecessary re-renders
+- Use proper dependency arrays in hooks
+- Lazy load heavy components if needed
+- Optimize images with `expo-image`
+
+### Code Organization
+- Group imports: external packages, then internal imports with `@/` prefix
+- Order: React/React Native imports, then third-party, then local imports
+- Keep components focused and single-purpose
+- Extract reusable logic into custom hooks
+- Keep component files under 300 lines when possible
+
+### Best Practices
+- Always handle loading and error states
+- Use proper TypeScript types for all props and state
+- Follow React hooks rules (no conditional hooks, proper dependencies)
+- Use meaningful variable and function names
+- Add comments for complex logic
+- Keep functions small and focused
+- Use early returns to reduce nesting
+- Prefer const over let when possible
+
+### Testing Considerations
+- Write testable components (pure functions, minimal side effects)
+- Keep business logic separate from UI components
+- Use proper TypeScript types to catch errors at compile time
+
+## Common Patterns
+
+### API Query Hook Usage
+```typescript
+const { data, isLoading, error } = useGetCountriesQuery();
+```
+
+### API Mutation Hook Usage
+```typescript
+const [login, { isLoading, error, isSuccess }] = useLoginMutation();
+await login({ type: 'teacher', email, password });
+```
+
+### Themed Component Usage
+```typescript
+const colorScheme = useColorScheme();
+const themeColors = Colors[colorScheme ?? 'light'];
+<ThemedText type="title">Title</ThemedText>
+<ThemedView style={styles.container}>...</ThemedView>
+```
+
+### Form Input Pattern
+```typescript
+const [formData, setFormData] = useState({ field: '' });
+const handleInputChange = (field: string, value: string) => {
+  setFormData((prev) => ({ ...prev, [field]: value }));
+};
+```
+
+### Toast Notification Pattern
+```typescript
+import { toast } from '@/hooks/use-toast';
+toast({
+  title: 'Success',
+  description: 'Operation completed successfully',
+});
+```
+
+## What NOT to Do
+- Don't use `any` type unless absolutely necessary
+- Don't mix styled-components or other styling libraries (use StyleSheet)
+- Don't create API calls outside of RTK Query
+- Don't use class components
+- Don't hardcode colors (use theme constants)
+- Don't skip error handling
+- Don't forget to handle loading states
+- Don't use relative imports when path aliases are available
+- Don't create components without proper TypeScript types
+

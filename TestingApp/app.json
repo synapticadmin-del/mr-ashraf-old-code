@@ -1,0 +1,68 @@
+{
+  "expo": {
+    "name": "EduSky-Testing",
+    "slug": "learning-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/logo.jpeg",
+    "scheme": "eduskytesting",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": false,
+    "splash": {
+      "image": "./assets/images/logo.jpeg",
+      "resizeMode": "contain",
+      "backgroundColor": "#1A73E8"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.edusky.testing",
+      "newArchEnabled": false
+    },
+    "android": {
+      "package": "com.edusky.testing",
+      "versionCode": 1,
+      "newArchEnabled": false,
+      "adaptiveIcon": {
+        "backgroundColor": "#1A73E8",
+        "foregroundImage": "./assets/images/logo.jpeg"
+      },
+      "permissions": []
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/logo.jpeg"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 35,
+            "targetSdkVersion": 35,
+            "buildToolsVersion": "34.0.0",
+            "newArchEnabled": false,
+            "enableProguardInReleaseBuilds": false,
+            "enableShrinkResourcesInReleaseBuilds": false
+          },
+          "ios": {
+            "newArchEnabled": false
+          }
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": false
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "881642e1-74e1-4929-b1cb-92471a768df1"
+      }
+    },
+    "owner": "abdullah1_ahmed"
+  }
+}
